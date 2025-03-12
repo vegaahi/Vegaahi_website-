@@ -1,0 +1,47 @@
+.about-us {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  
+  .text-highlight {
+    color: #007bff; /* Matches the blue color for the word "Infrastructure" */
+    font-style: italic;
+  }
+  
+  .description {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .features-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .features-list li {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .features-list li i {
+    margin-right: 10px;
+  }
+  
+  .details {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .image-wrapper {
+    max-width: 90%;
+    margin: auto;
+  }
+  
+  .image-wrapper img {
+    max-width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  

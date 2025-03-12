@@ -1,0 +1,116 @@
+/* Timeline.css */
+/* body {
+    margin-top: 20px;
+} */
+
+#timeline {
+    background-color: rgb(235, 237, 239); 
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adding a shadow effect for depth */
+}
+
+.timeline-steps {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeIn 1s ease-out; /* Animation for loading the steps */
+}
+
+.timeline-steps .timeline-step {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 1rem;
+    opacity: 0;
+    animation: slideIn 0.8s forwards; /* Slide in animation for individual steps */
+    animation-delay: 0.2s; /* Delay each step slightly for a staggered effect */
+}
+
+/* Add animation to individual timeline steps */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade-in animation for the whole timeline */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@media (min-width: 768px) {
+    .timeline-steps .timeline-step:not(:last-child):after {
+        content: "";
+        display: block;
+        border-top: .25rem dotted #3b82f6;
+        width: 3.46rem;
+        position: absolute;
+        left: 7.5rem;
+        top: .3125rem;
+    }
+
+    .timeline-steps .timeline-step:not(:first-child):before {
+        content: "";
+        display: block;
+        border-top: .25rem dotted #3b82f6;
+        width: 3.8125rem;
+        position: absolute;
+        right: 7.5rem;
+        top: .3125rem;
+    }
+}
+
+.timeline-steps .timeline-content {
+    width: 10rem;
+    text-align: center;
+}
+
+.timeline-steps .timeline-content .inner-circle {
+    border-radius: 1.5rem;
+    height: 1.5rem; /* Slightly larger size for better visibility */
+    width: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3b82f6;
+    font-size: 1rem; /* Icon size */
+    color: white;
+}
+
+/* Optional: Add an icon to the inner circle */
+.timeline-steps .timeline-content .inner-circle i {
+    font-size: 1.5rem; /* Adjust icon size */
+}
+
+/* Illustrative circles around inner circle */
+.timeline-steps .timeline-content .inner-circle:before {
+    content: "";
+    background-color: #3b82f6;
+    display: inline-block;
+    height: 4rem;
+    width: 4rem;
+    min-width: 4rem;
+    border-radius: 6.25rem;
+    opacity: .5;
+}
+
+/* Adding hover effect for timeline steps */
+.timeline-steps .timeline-step:hover .timeline-content .inner-circle {
+    background-color: #2563eb; /* Darker shade when hovered */
+    transform: scale(1.1); /* Slight scale effect on hover */
+    transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+

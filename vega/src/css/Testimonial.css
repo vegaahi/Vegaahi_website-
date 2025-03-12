@@ -1,0 +1,52 @@
+.testimonial-container {
+  padding: 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+  overflow: hidden; /* Hides the overflow when scrolling */
+}
+
+.testimonial-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.testimonial {
+  display: flex;
+  gap: 50px;
+  animation: scroll-left 20s linear infinite; /* Slower scrolling animation */
+  will-change: transform; /* Optimizes performance for the animation */
+}
+
+.testimonial-container:hover .testimonial {
+  animation-play-state: paused; /* Pause the scroll animation on hover */
+}
+
+.testimonial-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 150px; /* Adjust the width of each testimonial item */
+}
+
+.testimonial-image {
+  width: 100px; /* Adjust image size */
+  height: 100px;
+  border-radius: 0%; /* Makes the image circular */
+}
+
+.testimonial-name {
+  font-size: 16px;
+  color: #333;
+  margin-top: 10px; /* Add spacing between the image and name */
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%); /* Start from the right side */
+  }
+  100% {
+    transform: translateX(-100%); /* Scroll to the left side */
+  }
+}

@@ -1,0 +1,14 @@
+/* Custom transition for off-canvas */
+.offcanvas {
+  transition: transform 0.3s ease, visibility 0.3s ease;
+}
+
+.offcanvas.show {
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.offcanvas:not(.show) {
+  visibility: hidden;
+  transform: translateX(-100%);
+}

@@ -1,0 +1,98 @@
+.contact-us-container {
+  background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
+  padding: 50px 0;
+}
+
+.contact-us-container .contact-form {
+  background: #fff;
+  margin: auto;
+  width: 70%;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-us-container .contact-form .form-control {
+  border-radius: 1rem;
+  margin-bottom: 15px;
+  border: 1px solid #ced4da;
+  padding: 10px;
+}
+
+.contact-us-container .contact-image {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact-us-container .contact-image img {
+  border-radius: 50%;
+  width: 80px;
+  margin-top: -70px;
+  transform: rotate(29deg);
+}
+
+.contact-us-container .contact-form h3 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #0062cc;
+  font-weight: bold;
+}
+
+.contact-us-container .contact-form .btnContact {
+  width: 100%;
+  border: none;
+  border-radius: 1rem;
+  padding: 10px;
+  background: #dc3545;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-us-container .contact-form .btnContact:hover {
+  background: #c82333;
+  box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+.contact-us-container .btnContactSubmit {
+  width: 100%;
+  border-radius: 1rem;
+  padding: 10px;
+  color: #fff;
+  background-color: #0062cc;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-us-container .btnContactSubmit:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 10px rgba(0, 98, 204, 0.3);
+}
+
+/* Adjustments for mobile view */
+@media (max-width: 768px) {
+  .contact-us-container .contact-form {
+    width: 90%; /* Increase width on small screens */
+    padding: 20px;
+  }
+
+  .contact-us-container .contact-form .form-group {
+    margin-bottom: 10px; /* Reduce space between input fields */
+  }
+
+  .contact-us-container .contact-form .form-control {
+    margin-bottom: 10px; /* Adjust margin */
+  }
+
+  /* Adjust the spacing between the textarea and the button */
+  .contact-us-container .contact-form .btnContact {
+    margin-top: 20px; /* Add space between the message box and the button */
+  }
+
+  .contact-us-container .contact-image img {
+    width: 60px; /* Adjust image size */
+    margin-top: -50px; /* Adjust image position */
+  }
+}

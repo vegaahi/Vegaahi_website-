@@ -1,0 +1,4 @@
+  /* Reduce the width of the offcanvas */
+.custom-offcanvas-width {
+  width: 250px !important; /* Set a custom width for the offcanvas */
+}

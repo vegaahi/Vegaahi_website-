@@ -1,0 +1,81 @@
+.order-cardd {
+    color: #fff;
+  }
+  
+  .bg-c-blue {
+    background: linear-gradient(45deg, #4099ff, #73b4ff);
+  }
+  
+  .bg-c-green {
+    background: linear-gradient(45deg, #2ed8b6, #59e0c5);
+  }
+  
+  .bg-c-yellow {
+    background: linear-gradient(45deg, #FFB64D, #ffcb80);
+  }
+  
+  .bg-c-pink {
+    background: linear-gradient(45deg, #FF5370, #ff869a);
+  }
+  
+  /* Increase icon size to 50% of the card's height */
+.cardd-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Make the block take up the full card height */
+    padding: 20px;
+  }
+  
+  .icon {
+    font-size: 20vh; /* 50% of the viewport height, adjust this to fit your design */
+    margin-bottom: 15px; /* Add space below the icon for the title */
+    max-height: 50%; /* Limit the icon size to 50% of the card height */
+    width: auto; /* Ensure the icon scales proportionally */
+  }
+  
+  
+  .cardd .cardd-block {
+    padding: 25px;
+  }
+  
+  .order-cardd i {
+    font-size: 26px;
+  }
+  
+  .f-left {
+    float: left;
+  }
+  
+  .f-right {
+    float: right;
+  }
+  .cardd {
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .cardd:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow effect on hover */
+  }
+  
+  /* Optional: Add a smooth color transition for the background on hover */
+  .cardd.bg-c-blue:hover {
+    background: linear-gradient(45deg, #73b4ff, #4099ff); /* Reverse gradient effect */
+  }
+  
+  .cardd.bg-c-green:hover {
+    background: linear-gradient(45deg, #59e0c5, #2ed8b6);
+  }
+  
+  .cardd.bg-c-yellow:hover {
+    background: linear-gradient(45deg, #ffcb80, #FFB64D);
+  }
+  
+  .cardd.bg-c-pink:hover {
+    background: linear-gradient(45deg, #ff869a, #FF5370);
+  }
+  
+  
