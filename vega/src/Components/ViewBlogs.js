@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { Container, Button, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Button, Row, Col, Spinner, Modal } from "react-bootstrap";
 import Swal from "sweetalert2";
 import api from "../api";
 
 const ViewBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [show, setShow] = useState(false);
+  const [selectedBlog, setSelectedBlog] = useState(null);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -23,6 +25,12 @@ const ViewBlogs = () => {
 
     fetchBlogs();
   }, []);
+
+  // Function to open modal and set selected blog
+  const handleShow = (blog) => {
+    setSelectedBlog(blog);
+    setShow(true);
+  };
 
   return (
     <Container className="p-4">
@@ -53,7 +61,7 @@ const ViewBlogs = () => {
                 <p className="text-muted" style={{ maxHeight: "4.5em", overflow: "hidden" }}>
                   <span dangerouslySetInnerHTML={{ __html: blog.content.slice(0, 100) + "..." }} />
                 </p>
-                <Button variant="primary" className="fw-bold">
+                <Button variant="primary" className="fw-bold" onClick={() => handleShow(blog)}>
                   Read More
                 </Button>
               </div>
@@ -61,6 +69,33 @@ const ViewBlogs = () => {
           ))}
         </Row>
       )}
+
+      {/* Bootstrap Modal for Blog Content */}
+      <Modal show={show} onHide={() => setShow(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>{selectedBlog?.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedBlog?.image && (
+            <div className="text-center mb-3">
+              <img
+                src={`./${selectedBlog.image}`}
+                alt={selectedBlog.title}
+                className="img-fluid rounded"
+                style={{ maxHeight: "300px", objectFit: "cover" }}
+              />
+            </div>
+          )}
+          <p className="text-dark">
+            <span dangerouslySetInnerHTML={{ __html: selectedBlog?.content }} />
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShow(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };

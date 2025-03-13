@@ -10,17 +10,19 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   // Verify user on mount
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await api.get("users/user", { withCredentials: true });
-        setUser(response.data);
-      } catch (error) {
-        setUser(null);
-      }
-    };
-    fetchUser();
-  }, []);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await api.get("users/user", { withCredentials: true });
+  //       setUser(response.data);
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       setUser(null);
+  //       console.log("error");
+  //     }
+  //   };
+  //   fetchUser();
+  // }, []);
 
   const login = async (credentials) => {
     try {

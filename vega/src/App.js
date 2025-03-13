@@ -58,12 +58,13 @@ function App() {
     <Router>
       <div>
       <AuthProvider>
+
+        
         <Navbar />
        
         <Routes>
-        <Route path="login" element={<Login/>} />
-        <Route path="/" element={<LandingPage />} />
-       
+          <Route path="login" element={<Login/>} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/programming" element={<Programming />} />
           <Route path="/basic-programming" element={<BasicProgramming />} />
           <Route path="/testing" element={<Testing />} />
