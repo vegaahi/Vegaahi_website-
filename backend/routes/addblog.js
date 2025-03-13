@@ -5,9 +5,11 @@ const fs = require("fs");
 const router = express.Router();
 const Blog = require("../model/addblog");
 
-// Define the image upload directory
-const uploadDir = path.resolve(__dirname, "../../vega/public/images/");
-
+// Ensure the uploads directory exists
+const uploadDir = path.join(__dirname, "../uploads");
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 // Configure Multer for file uploads
 const storage = multer.diskStorage({
@@ -25,15 +27,18 @@ router.post("/addblog", upload.single("image"), async (req, res) => {
         const { title, content } = req.body;
         if (!title || !content || !req.file) return res.status(400).json({ message: "All fields are required" });
 
-        const newBlog = await Blog.create({ 
-            title, 
-            content, 
-            image: `/images/${req.file.filename}` 
-        });
+        // Generate full image URL
+        const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+
+        // Save blog to database
+        const newBlog = await Blog.create({ title, content, image: imageUrl });
 
         res.status(201).json({ message: "Blog added successfully", data: newBlog });
     } catch (error) { handleError(res, error); }
 });
+
+// Serve uploaded images statically
+router.use("/uploads", express.static(uploadDir));
 
 // Route to get all blogs
 router.get("/getallblogs", async (_, res) => {
@@ -52,7 +57,8 @@ router.get("/getblog/:id", async (req, res) => {
 // Route to update a blog
 router.put("/updateblog/:id", upload.single("image"), async (req, res) => {
     try {
-        const { title, content } = req.body, updates = { title, content };
+        const { title, content } = req.body;
+        const updates = { title, content };
 
         if (req.file) {
             const blog = await Blog.findById(req.params.id);
@@ -60,7 +66,7 @@ router.put("/updateblog/:id", upload.single("image"), async (req, res) => {
                 const oldImagePath = path.join(uploadDir, path.basename(blog.image));
                 if (fs.existsSync(oldImagePath)) fs.unlinkSync(oldImagePath);
             }
-            updates.image = `/images/${req.file.filename}`;
+            updates.image = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
         }
 
         const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, updates, { new: true }).lean();
@@ -83,8 +89,5 @@ router.delete("/deleteblog/:id", async (req, res) => {
         res.status(200).json({ message: "Blog deleted successfully" });
     } catch (error) { handleError(res, error); }
 });
-
-// Serve uploaded images statically
-router.use("/images", express.static(uploadDir));
 
 module.exports = router;

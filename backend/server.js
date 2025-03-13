@@ -3,47 +3,54 @@ const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const path = require("path"); 
+const multer = require("multer");
+
+// Import Routes
 const authRoutes = require("./routes/authRoutes");
 const protectedRoutes = require("./routes/protectedRoutes");
-const contactRoutes = require('./routes/ContactusRoutes');
-const addUserRoutes = require('./routes/adduser');
+const contactRoutes = require("./routes/ContactusRoutes");
+const addUserRoutes = require("./routes/adduser");
 const blogRoutes = require("./routes/addblog");
-const multer = require("multer");
-const path = require('path'); 
 
 dotenv.config();
 
+// Middleware
 app.use(express.json());
-
-// Enable CORS (Make sure the frontend domain is correct)
 app.use(cors({
-  origin: ["http://localhost:3000"], // Change * to specific domains if deploying
+  origin: ["http://localhost:3000"], // Adjust for production
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
-// ✅ API Routes should come before serving React build
+// ✅ Serve Static Files
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));  // Ensure uploads are accessible
+app.use("/images", express.static(path.join(__dirname, "src/images")));  // Serving static images
+
+
+// ✅ API Routes (Before Serving React)
 app.use('/contact', contactRoutes);
 app.use("/auth", authRoutes);
 app.use("/protected", protectedRoutes);
 app.use("/users", addUserRoutes);
 app.use("/blog", blogRoutes);
-app.use("/images", express.static("src/images"));
 
-// ✅ Serve React static files AFTER API routes
+// ✅ Serve React Build (After API Routes)
 app.use(express.static(path.join(__dirname, "../vega/build")));
 
-// ✅ React Wildcard Route (MUST be after API routes)
+// ✅ React Wildcard Route (Handles SPA Routing)
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../vega/build", "index.html"));
 });
 
+// ✅ Database Connection
 const PORT = process.env.PORT || 3001;
 const MONGODB_URL = process.env.MONGODB_URL;
 
 mongoose
-  .connect(MONGODB_URL, {})
-  .then(() => console.log("Database connected..."))
-  .catch((error) => console.log(error));
+  .connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("✅ Database connected..."))
+  .catch((error) => console.log("❌ Database connection error:", error));
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+// ✅ Start Server
+app.listen(PORT, () => console.log(`🚀 Server is running on port ${PORT}`));

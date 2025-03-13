@@ -9,15 +9,24 @@ const ViewBlogs = () => {
   const [show, setShow] = useState(false);
   const [selectedBlog, setSelectedBlog] = useState(null);
 
+  // Backend Base URL from environment variables
+  const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
+
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const response = await api.get("/blog/getallblogs");
         setBlogs(response.data.data);
-        console.log(response.data.data);
       } catch (error) {
-        console.error("API Error:", error.response ? error.response.data : error.message);
-        Swal.fire({ icon: "error", title: "Oops!", text: "Failed to fetch blogs. Please try again." });
+        console.error(
+          "API Error:",
+          error.response ? error.response.data : error.message
+        );
+        Swal.fire({
+          icon: "error",
+          title: "Oops!",
+          text: "Failed to fetch blogs. Please try again.",
+        });
       } finally {
         setLoading(false);
       }
@@ -50,7 +59,11 @@ const ViewBlogs = () => {
                 {blog.image && (
                   <div className="text-center mb-2">
                     <img
-                      src={`./${blog.image}`} 
+                      src={
+                        blog.image.startsWith("http")
+                          ? blog.image
+                          : `${BASE_URL}/uploads/${blog.image}`
+                      }
                       alt={blog.title}
                       className="img-fluid rounded"
                       style={{ maxHeight: "200px", objectFit: "cover" }}
@@ -58,10 +71,24 @@ const ViewBlogs = () => {
                   </div>
                 )}
                 <h5 className="fw-bold text-dark">{blog.title}</h5>
-                <p className="text-muted" style={{ maxHeight: "4.5em", overflow: "hidden" }}>
-                  <span dangerouslySetInnerHTML={{ __html: blog.content.slice(0, 100) + "..." }} />
+                <p
+                  className="text-muted"
+                  style={{ maxHeight: "4.5em", overflow: "hidden" }}
+                >
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html:
+                        blog.content.length > 100
+                          ? blog.content.slice(0, 100) + "..."
+                          : blog.content,
+                    }}
+                  />
                 </p>
-                <Button variant="primary" className="fw-bold" onClick={() => handleShow(blog)}>
+                <Button
+                  variant="primary"
+                  className="fw-bold"
+                  onClick={() => handleShow(blog)}
+                >
                   Read More
                 </Button>
               </div>
@@ -79,7 +106,11 @@ const ViewBlogs = () => {
           {selectedBlog?.image && (
             <div className="text-center mb-3">
               <img
-                src={`./${selectedBlog.image}`}
+                src={
+                  selectedBlog.image.startsWith("http")
+                    ? selectedBlog.image
+                    : `${BASE_URL}/uploads/${selectedBlog.image}`
+                }
                 alt={selectedBlog.title}
                 className="img-fluid rounded"
                 style={{ maxHeight: "300px", objectFit: "cover" }}
