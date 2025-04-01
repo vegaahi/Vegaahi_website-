@@ -1,10 +1,11 @@
 import React from "react";
-import {  Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "../../css/Admin.css";
 import EmployeeSidebar from "./EmployeeSidebar";
 import EmployeeDashboard from "./EmployeeDashboard";
 import Profile from "./Profile";
-
+import ViewBlogsAdmin from "./viewBlogsAdmin";
+import ProtectedRoute from "../ProtectedRoutes";
 
 function EmployeeDashboardRoutes() {
   return (
@@ -14,8 +15,23 @@ function EmployeeDashboardRoutes() {
 
         <div className="col-md-9 col-lg-10">
           <Routes>
-            <Route path="/" element={<EmployeeDashboard/>} />
-            <Route path="/profile" element={<Profile/>} />
+            <Route path="/" element={<EmployeeDashboard />} />
+            <Route
+              element={
+                <ProtectedRoute
+                  allowedRoles={[
+                    "md/boardofdirectors",
+                    "manager",
+                    "hr",
+                    "employee",
+                    "intern",
+                  ]}
+                />
+              }
+            >
+              <Route path="/profile" element={<Profile />} />
+            </Route>
+            <Route path="/viewblogsadmin" element={<ViewBlogsAdmin />} />
             <Route path="*" element={<div>404 - Page not found</div>} />
           </Routes>
         </div>

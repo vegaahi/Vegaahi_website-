@@ -12,7 +12,7 @@ const protectedRoutes = require("./routes/protectedRoutes");
 const contactRoutes = require("./routes/ContactusRoutes");
 const addUserRoutes = require("./routes/adduser");
 const blogRoutes = require("./routes/addblog");
-
+const employeeRoutes = require("./routes/addEmployeeRoutes");
 dotenv.config();
 
 // Middleware
@@ -34,6 +34,8 @@ app.use("/auth", authRoutes);
 app.use("/protected", protectedRoutes);
 app.use("/users", addUserRoutes);
 app.use("/blog", blogRoutes);
+app.use("/employee", employeeRoutes);
+app.use("/employee/blog", blogRoutes);
 
 // ✅ Serve React Build (After API Routes)
 app.use(express.static(path.join(__dirname, "../vega/build")));

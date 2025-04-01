@@ -43,7 +43,10 @@ import ManagerDashboardRoutes from "./Components/Admin/ManagerDashboardRoutes";
 import AddBlog from "./Components/Admin/AddBlog";
 import ProtectedRoute from "../src/Components/ProtectedRoutes";
 import PrivatePolicy from "./Components/PrivacyPolicy";
+import ViewBlogsAdmin from "./Components/Admin/viewBlogsAdmin";
 
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import Profile from "./Components/Admin/Profile";
 
 
 
@@ -94,6 +97,7 @@ function App() {
           <Route path="level5" element={<Level5/>} />
           <Route path="addblog" element={<AddBlog/>} />
           <Route path="viewblogs" element={<ViewBlogs/>} />
+          <Route path="/viewblogsadmin" element={<ViewBlogsAdmin/>} />
           <Route path="/apply/:jobId" element={<Apply />} />
         
           {/* <Route path="/hr/*" element={<HrDashboardRoutes/>} /> 
@@ -117,6 +121,8 @@ function App() {
           <Route element={<ProtectedRoute allowedRoles={["employee"]} />}>
             <Route path="/employee/*" element={<EmployeeDashboardRoutes />} />
           </Route>
+
+          
 
           {/* <Route element={<ProtectedRoute allowedRoles={["Intern"]} />}>
             <Route path="/intern/*" element={<InternDashboard />} />

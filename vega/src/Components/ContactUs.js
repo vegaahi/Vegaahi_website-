@@ -28,10 +28,10 @@ const ContactUs = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await api.post("/contactus", formData);
+      const response = await api.post("/contact/contactus", formData);
 
       if (response.status === 200) {
-        successSound.play(); // Play success sound
+        successSound.play(); 
         Swal("Success!", "Your message has been sent successfully.", "success");
         setFormData({
           name: "",

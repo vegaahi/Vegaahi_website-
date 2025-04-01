@@ -63,6 +63,7 @@ const Footer = () => {
             </address>
           </div>
 
+
           {/* Location Column */}
           <div className="col-12 col-md-2 mb-4 mb-md-0">
             <h3>Location</h3>
@@ -76,8 +77,9 @@ const Footer = () => {
 
         <hr className="bg-white my-4" />
 
-        {/* Social Media Links */}
-        <div className="text-center mb-3">
+
+     {/* Social Media Links */}
+     <div className="text-center mb-3">
           <a href="https://www.facebook.com/share/15vUY7mb8f/" target="_blank" rel="noopener noreferrer" className="text-white mx-2">
             <i className="fab fa-instagram fa-2x"></i>
           </a>
@@ -88,6 +90,7 @@ const Footer = () => {
             <i className="fab fa-facebook fa-2x"></i>
           </a>
         </div>
+        
 
         {/* Copyright */}
         <div className="text-center">
