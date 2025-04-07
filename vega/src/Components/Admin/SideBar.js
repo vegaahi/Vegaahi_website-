@@ -6,126 +6,70 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const SideBar = () => {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
 
-  // Function to handle opening of Offcanvas
   const handleOpenOffcanvas = () => {
     setIsOffcanvasOpen(true);
   };
 
-  // Function to handle closing of Offcanvas
   const handleCloseOffcanvas = () => {
     setIsOffcanvasOpen(false);
   };
 
+  const menuItems = [
+    { icon: "fas fa-tachometer-alt", label: "HR Dashboard", to: "/hr/" },
+    { icon: "fas fa-user-plus", label: "View Employee", to: "/hr/viewemployee" },
+    { icon: "fas fa-file-signature", label: "Offer Letter", to: "/hr/offerletter" },
+    { icon: "fas fa-chart-line", label: "Increment Letter", to: "/hr/incrementletter" },
+    { icon: "fas fa-file-alt", label: "Experience Letter", to: "/hr/experienceletter" },
+    { icon: "fas fa-file-invoice-dollar", label: "Payslips", to: "/hr/payslips" },
+    { icon: "fas fa-file-invoice-dollar", label: "Messages", to: "/hr/viewmessages" },
+    { icon: "fas fa-sign-out-alt", label: "Logout", to: "/hr/logout" },
+  ];
+
   return (
     <>
-      {/* Sidebar (Responsive with Off-Canvas) */}
-      <div className="d-none d-md-inline-block col-md-3 col-lg-2 sidebar bg-light vh-100">
-        {/* Sidebar for Medium and Larger Devices */}
-        <div>
-          <h5 className="py-3 text-center">HR Dashboard</h5>
-          <ul className="list-group">
-            <li className="list-group-item">
-              <i className="fas fa-tachometer-alt me-2"></i>
-              <Link to="/hr/hrdashboard" className="text-decoration-none text-dark">HrDashboard</Link>
+      {/* Sidebar for Medium and Larger Devices */}
+      <div className="d-none d-md-block bg-light vh-100 p-3" style={{ width: "250px" }}>
+        <h5 className="text-center mb-4">HR Dashboard</h5>
+        <ul className="list-group">
+          {menuItems.map((item, index) => (
+            <li className="list-group-item d-flex align-items-center" key={index}>
+              <i className={`${item.icon} me-2`}></i>
+              <Link to={item.to} className="text-decoration-none text-dark">
+                {item.label}
+              </Link>
             </li>
-            <li className="list-group-item">
-              <i className="fas fa-user-plus me-2"></i>
-              <Link to="/hr/viewemployee" className="text-decoration-none text-dark">View Employee</Link>
-            </li>
-            <li className="list-group-item">
-              <i className="fas fa-file-signature me-2"></i>
-              <Link to="/hr/offerletter" className="text-decoration-none text-dark">Offer Letter</Link>
-            </li>
-            <li className="list-group-item">
-              <i className="fas fa-chart-line me-2"></i>
-              <Link to="/hr/incrementletter" className="text-decoration-none text-dark">Increment Letter</Link>
-            </li>
-            <li className="list-group-item">
-              <i className="fas fa-file-alt me-2"></i>
-              <Link to="/hr/experienceletter" className="text-decoration-none text-dark">Experience Letter</Link>
-            </li>
-            <li className="list-group-item">
-              <i className="fas fa-file-invoice-dollar me-2"></i>
-              <Link to="/hr/payslips" className="text-decoration-none text-dark">Payslips</Link>
-            </li>
-            <li className="list-group-item">
-              <i className="fas fa-sign-out-alt me-2"></i>
-              <Link to="/hr/logout" className="text-decoration-none text-dark">Logout</Link>
-            </li>
-          </ul>
-        </div>
+          ))}
+        </ul>
       </div>
 
-      {/* Off-Canvas Sidebar for Small Devices */}
+      {/* Offcanvas Sidebar for Small Devices */}
       <div className="d-md-none">
-        <button
-          className="btn my-2"
-          type="button"
-          onClick={handleOpenOffcanvas}
-        >
+        <button className="btn btn-light m-2" onClick={handleOpenOffcanvas}>
           <i className="fas fa-bars"></i>
         </button>
         <div
           className={`offcanvas offcanvas-start ${isOffcanvasOpen ? "show" : ""}`}
           tabIndex="-1"
-          id="offcanvasSidebar"
-          aria-labelledby="offcanvasSidebarLabel"
+          style={{ visibility: isOffcanvasOpen ? "visible" : "hidden" }}
         >
           <div className="offcanvas-header">
-            <h5 className="offcanvas-title" id="offcanvasSidebarLabel">
-              HR Dashboard
-            </h5>
-            <button
-              type="button"
-              className="btn-close"
-              onClick={handleCloseOffcanvas}
-              aria-label="Close"
-            ></button>
+            <h5 className="offcanvas-title">HR Dashboard</h5>
+            <button className="btn-close" onClick={handleCloseOffcanvas}></button>
           </div>
-          <div className="offcanvas-body">
+          <div className="offcanvas-body p-0">
             <ul className="list-group">
-              <li className="list-group-item">
-                <i className="fas fa-tachometer-alt me-2"></i>
-                <Link to="" className="text-decoration-none text-dark" onClick={handleCloseOffcanvas}>
-                  Dashboard
-                </Link>
-              </li>
-              <li className="list-group-item">
-                <i className="fas fa-user-plus me-2"></i>
-                <Link to="hr/viewemployee" className="text-decoration-none text-dark" onClick={handleCloseOffcanvas}>
-                  View Employee
-                </Link>
-              </li>
-              <li className="list-group-item">
-                <i className="fas fa-file-signature me-2"></i>
-                <Link to="/hr/offerletter" className="text-decoration-none text-dark" onClick={handleCloseOffcanvas}>
-                  Offer Letter
-                </Link>
-              </li>
-              <li className="list-group-item">
-                <i className="fas fa-chart-line me-2"></i>
-                <Link to="/hr/incrementletter" className="text-decoration-none text-dark" onClick={handleCloseOffcanvas}>
-                  Increment Letter
-                </Link>
-              </li>
-              <li className="list-group-item">
-                <i className="fas fa-file-alt me-2"></i>
-                <Link to="/hr/experienceletter" className="text-decoration-none text-dark" onClick={handleCloseOffcanvas}>
-                  Experience Letter
-                </Link>
-              </li>
-              <li className="list-group-item">
-                <i className="fas fa-file-invoice-dollar me-2"></i>
-                <Link to="/hr/payslips" className="text-decoration-none text-dark" onClick={handleCloseOffcanvas}>
-                  Payslips
-                </Link>
-              </li>
-              <li className="list-group-item">
-                <i className="fas fa-sign-out-alt me-2"></i>
-                <Link to="/hr/logout" className="text-decoration-none text-dark" onClick={handleCloseOffcanvas}>
-                  Logout
-                </Link>
-              </li>
+              {menuItems.map((item, index) => (
+                <li className="list-group-item d-flex align-items-center" key={index}>
+                  <i className={`${item.icon} me-2`}></i>
+                  <Link
+                    to={item.to}
+                    className="text-decoration-none text-dark"
+                    onClick={handleCloseOffcanvas}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

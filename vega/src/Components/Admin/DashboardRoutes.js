@@ -10,7 +10,6 @@ import IncrementLetter from "./IncrementLetter";
 import OfferLetter from "./OfferLetter";
 import Payslips from "./Payslips";
 import AddEmployee from "./AddEmployee";
-import UpdateEmployee from "./UpdateEmployee";
 import Dashboard from './Dashboard';
 import AdminSidebar from './AdminSidebar';
 import ViewHr from './ViewHr';
@@ -32,7 +31,7 @@ const DashboardRoutes = () => {
             <Route path="/offerletter" element={<OfferLetter />} />
             <Route path="/payslips" element={<Payslips />} />
             <Route path="/addemployee" element={<AddEmployee />} />
-            <Route path="/updateemployee" element={<UpdateEmployee />} />
+          
             <Route path="/viewhr" element={<ViewHr />} />
             <Route path="/addhr" element={<AddHr/>} />
             <Route path="/updatehr" element={<UpdateHr/>} />

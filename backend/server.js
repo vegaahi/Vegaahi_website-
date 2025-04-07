@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path"); 
 const multer = require("multer");
+const cookieParser = require("cookie-parser");
 
 // Import Routes
 const authRoutes = require("./routes/authRoutes");
@@ -22,6 +23,7 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+app.use(cookieParser());
 
 // ✅ Serve Static Files
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));  // Ensure uploads are accessible
@@ -30,7 +32,7 @@ app.use("/images", express.static(path.join(__dirname, "src/images")));  // Serv
 
 // ✅ API Routes (Before Serving React)
 app.use('/contact', contactRoutes);
-app.use("/auth", authRoutes);
+app.use("/auth", authRoutes); 
 app.use("/protected", protectedRoutes);
 app.use("/users", addUserRoutes);
 app.use("/blog", blogRoutes);

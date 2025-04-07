@@ -6,6 +6,7 @@ import EmployeeDashboard from "./EmployeeDashboard";
 import Profile from "./Profile";
 import ViewBlogsAdmin from "./viewBlogsAdmin";
 import ProtectedRoute from "../ProtectedRoutes";
+import AddBlog from "./AddBlog";
 
 function EmployeeDashboardRoutes() {
   return (
@@ -32,6 +33,7 @@ function EmployeeDashboardRoutes() {
               <Route path="/profile" element={<Profile />} />
             </Route>
             <Route path="/viewblogsadmin" element={<ViewBlogsAdmin />} />
+            <Route path="addblog" element={<AddBlog/>} />
             <Route path="*" element={<div>404 - Page not found</div>} />
           </Routes>
         </div>

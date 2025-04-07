@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Table, Button, Container, Row, Col, Pagination } from "react-bootstrap";
 import api from "../../api";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+
 const ViewEmployee = () => {
   const [employees, setEmployees] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,7 +12,7 @@ const ViewEmployee = () => {
   useEffect(() => {
     api.get("/employee/getall")
       .then(response => {
-        console.log("API Response:", response.data); 
+        console.log("API Response:", response.data);
         if (Array.isArray(response.data)) {
           setEmployees(response.data);
         } else {
@@ -23,6 +25,40 @@ const ViewEmployee = () => {
         setEmployees([]);
       });
   }, []);
+
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await api.delete(`/employee/delete/${id}`);
+        setEmployees(employees.filter(employee => employee.employeeId !== id));
+
+        Swal.fire({
+          icon: "success",
+          title: "Deleted!",
+          text: "Employee has been deleted.",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      } catch (error) {
+        console.error("Error deleting employee:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Error!",
+          text: "Failed to delete employee.",
+        });
+      }
+    }
+  };
 
   // Pagination Logic
   const indexOfLastEmployee = currentPage * employeesPerPage;
@@ -50,6 +86,7 @@ const ViewEmployee = () => {
               <th>Employee ID</th>
               <th>Full Name</th>
               <th>Email</th>
+              <th>Designation</th>
               <th>Phone Number</th>
               <th>Location</th>
               <th>Employee Type</th>
@@ -59,6 +96,7 @@ const ViewEmployee = () => {
               <th>Experience</th>
               <th>Gender</th>
               <th>Aadhar Number</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -68,6 +106,7 @@ const ViewEmployee = () => {
                   <td>{employee.employeeId}</td>
                   <td>{employee.name}</td>
                   <td>{employee.email}</td>
+                  <td>{employee.designation}</td>
                   <td>{employee.phoneNumber}</td>
                   <td>{employee.location}</td>
                   <td>{employee.employeeType}</td>
@@ -77,6 +116,16 @@ const ViewEmployee = () => {
                   <td>{employee.experience}</td>
                   <td>{employee.gender}</td>
                   <td>{employee.aadharNumber}</td>
+                  <td>
+                    <div className="d-flex justify-content-center">
+                      <Link to={`/hr/editemployee/${employee.employeeId}`} className="btn btn-primary btn-sm me-2">
+                        <i className="bi bi-pencil-square"></i>
+                      </Link>
+                      <Button variant="danger" size="sm" onClick={() => handleDelete(employee.employeeId)}>
+                        <i className="bi bi-trash"></i>
+                      </Button>
+                    </div>
+                  </td>
                 </tr>
               ))
             ) : (
@@ -90,8 +139,6 @@ const ViewEmployee = () => {
         </Table>
       </div>
 
-      {/* Pagination */}
-      <Pagination className="justify-content-center"></Pagination>
       {/* Pagination */}
       <Pagination className="justify-content-center">
         <Pagination.Prev
