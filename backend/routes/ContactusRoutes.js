@@ -53,7 +53,7 @@ router.put("/contactus/:id", async (req, res) => {
   }
 });
 
-router.delete("/contactus/:id", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
   try {
     const contactus = await ContactUs.findOneAndDelete({ _id: req.params.id });
     res.status(200).json({ message: "Contact us deleted successfully", data: contactus });

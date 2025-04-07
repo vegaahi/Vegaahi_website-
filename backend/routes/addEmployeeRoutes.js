@@ -24,7 +24,7 @@ router.post("/add", async (req, res) => {
 });
 
 // Get all employees
-router.get("/getall", async (req, res) => {
+router.get("/getall",verifyToken, async (req, res) => {
   try {
     const employees = await Employee.find();
     const employeesWithoutPassword = employees.map(removePassword); // Exclude passwords
@@ -35,7 +35,7 @@ router.get("/getall", async (req, res) => {
 });
 
 // Get employee by email
-router.get("/getbyemail/:email",  async (req, res) => {
+router.get("/getbyemail/:email",verifyToken,  async (req, res) => {
   try {
     const employee = await Employee.findOne({ email: req.params.email });
     await console.log(employee);
@@ -48,9 +48,9 @@ router.get("/getbyemail/:email",  async (req, res) => {
 });
 
 // Get employee by ID
-router.get("/getby/:id", verifyToken, async (req, res) => {
+router.get("/getby/:id",  async (req, res) => {
   try {
-    const employee = await Employee.findById(req.params.id);
+    const employee = await Employee.findOne({ employeeId: req.params.id });
     if (!employee) return res.status(404).json({ message: "Employee not found" });
     res.status(200).json(removePassword(employee)); // Exclude password from response
   } catch (error) {
@@ -59,12 +59,10 @@ router.get("/getby/:id", verifyToken, async (req, res) => {
 });
 
 // Update employee by ID
-router.put("/updateby/:id", verifyToken, async (req, res) => {
+router.put("/updateby/:id",verifyToken, async (req, res) => {
   try {
-    const updatedEmployee = await Employee.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const updatedEmployee = await Employee.findOneAndUpdate({employeeId: req.params.id}, req.body, { new: true, runValidators: true });
+  
     if (!updatedEmployee) return res.status(404).json({ message: "Employee not found" });
     res.status(200).json(removePassword(updatedEmployee)); // Exclude password from response
   } catch (error) {
@@ -75,7 +73,9 @@ router.put("/updateby/:id", verifyToken, async (req, res) => {
 // Delete employee by ID
 router.delete("/delete/:id", verifyToken, async (req, res) => {
   try {
-    const deletedEmployee = await Employee.findByIdAndDelete(req.params.id);
+    const deletedEmployee = await Employee.findOneAndDelete({ 
+      employeeId: req.params.id });
+
     if (!deletedEmployee) return res.status(404).json({ message: "Employee not found" });
     res.status(200).json({ message: "Employee deleted successfully" });
   } catch (error) {

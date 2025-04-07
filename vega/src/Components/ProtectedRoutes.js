@@ -1,13 +1,18 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../context/AuthContext"; // Adjust path based on your project structure
+import { useAuth } from "../context/AuthContext";
 
 const ProtectedRoute = ({ allowedRoles }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
-  if (!user) return <Navigate to="/login" replace />; // Redirect if not authenticated
-  if (allowedRoles && !allowedRoles.includes(user.role)) return <Navigate to="/" replace />; // Restrict access
+  if (loading) return <div>Loading...</div>; 
 
-  return <Outlet />; // Render child routes if authorized
+  if (!user) return <Navigate to="/login" replace />;
+
+  if (allowedRoles && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

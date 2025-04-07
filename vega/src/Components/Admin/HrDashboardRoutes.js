@@ -10,7 +10,8 @@ import IncrementLetter from "./IncrementLetter";
 import OfferLetter from "./OfferLetter";
 import Payslips from "./Payslips";
 import AddEmployee from "./AddEmployee";
-import UpdateEmployee from "./UpdateEmployee";
+import EditEmployee from "./EditEmployee";
+import Messages from "./Messages";
 
 
 function HrDashboardRoutes() {
@@ -23,12 +24,13 @@ function HrDashboardRoutes() {
           <Routes>
             <Route path="/" element={<HrDashboard/>} />
             <Route path="/viewemployee" element={<ViewEmployee />} />
+            <Route path="/editemployee/:id" element={<EditEmployee />} />
             <Route path="/experienceletter" element={<ExperienceLetter />} />
             <Route path="/incrementletter" element={<IncrementLetter />} />
             <Route path="/offerletter" element={<OfferLetter />} />
             <Route path="/payslips" element={<Payslips />} />
             <Route path="/addemployee" element={<AddEmployee />} />
-            <Route path="/updateemployee" element={<UpdateEmployee />} />
+            <Route path="/viewmessages" element={<Messages/>} />
             <Route path="*" element={<div>404 - Page not found</div>} />
           </Routes>
         </div>

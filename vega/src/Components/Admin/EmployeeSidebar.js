@@ -75,9 +75,9 @@ const EmployeeSidebar = () => {
             <i className="fas fa-file-upload"></i> profile
           </Link>
 
-          <Link to="/employee/viewblogsadmin" className="dashboard-nav-item">
+          {/* <Link to="/employee/viewblogsadmin" className="dashboard-nav-item">
             <i className="fas fa-file-upload"></i> view blogs
-          </Link>
+          </Link> */}
          
          
           <div className="nav-item-divider"></div>

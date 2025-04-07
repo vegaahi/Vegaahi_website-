@@ -80,7 +80,7 @@ const Footer = () => {
 
      {/* Social Media Links */}
      <div className="text-center mb-3">
-          <a href="https://www.facebook.com/share/15vUY7mb8f/" target="_blank" rel="noopener noreferrer" className="text-white mx-2">
+          <a href="https://www.instagram.com/vegaahi_it_pvt_ltd?igsh=MWpvdWtmcDBsbmRvZA==" target="_blank" rel="noopener noreferrer" className="text-white mx-2">
             <i className="fab fa-instagram fa-2x"></i>
           </a>
           <a href="https://www.linkedin.com/in/sandeep-akkapelli-36a8841a0?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app " target="_blank" rel="noopener noreferrer" className="text-white mx-2">
