@@ -1,8 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Container, Row, Col, Pagination } from "react-bootstrap";
+import {
+  Table,
+  Button,
+  Container,
+  Row,
+  Col,
+  Pagination,
+} from "react-bootstrap";
 import api from "../../api";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+
+// Helper to calculate duration from hireDate
+const calculateDuration = (hireDate) => {
+  const startDate = new Date(hireDate);
+  const now = new Date();
+
+  let years = now.getFullYear() - startDate.getFullYear();
+  let months = now.getMonth() - startDate.getMonth();
+  let days = now.getDate() - startDate.getDate();
+
+  if (days < 0) {
+    months -= 1;
+    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
+
+  if (months < 0) {
+    years -= 1;
+    months += 12;
+  }
+
+  const parts = [];
+  if (years > 0) parts.push(`${years} yr${years > 1 ? "s" : ""}`);
+  if (months > 0) parts.push(`${months} mo${months > 1 ? "s" : ""}`);
+  if (days > 0) parts.push(`${days} day${days > 1 ? "s" : ""}`);
+
+  return parts.join(", ") || "0 days";
+};
 
 const ViewEmployee = () => {
   const [employees, setEmployees] = useState([]);
@@ -10,9 +45,9 @@ const ViewEmployee = () => {
   const employeesPerPage = 5;
 
   useEffect(() => {
-    api.get("/employee/getall")
-      .then(response => {
-        console.log("API Response:", response.data);
+    api
+      .get("/employee/getall")
+      .then((response) => {
         if (Array.isArray(response.data)) {
           setEmployees(response.data);
         } else {
@@ -20,7 +55,7 @@ const ViewEmployee = () => {
           setEmployees([]);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching employees:", error);
         setEmployees([]);
       });
@@ -40,7 +75,9 @@ const ViewEmployee = () => {
     if (result.isConfirmed) {
       try {
         await api.delete(`/employee/delete/${id}`);
-        setEmployees(employees.filter(employee => employee.employeeId !== id));
+        setEmployees(
+          employees.filter((employee) => employee.employeeId !== id)
+        );
 
         Swal.fire({
           icon: "success",
@@ -60,10 +97,12 @@ const ViewEmployee = () => {
     }
   };
 
-  // Pagination Logic
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-  const currentEmployees = employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+  const currentEmployees = employees.slice(
+    indexOfFirstEmployee,
+    indexOfLastEmployee
+  );
   const totalPages = Math.ceil(employees.length / employeesPerPage);
 
   return (
@@ -101,7 +140,7 @@ const ViewEmployee = () => {
           </thead>
           <tbody>
             {currentEmployees.length > 0 ? (
-              currentEmployees.map(employee => (
+              currentEmployees.map((employee) => (
                 <tr key={employee.employeeId} className="text-center">
                   <td>{employee.employeeId}</td>
                   <td>{employee.name}</td>
@@ -111,17 +150,38 @@ const ViewEmployee = () => {
                   <td>{employee.location}</td>
                   <td>{employee.employeeType}</td>
                   <td>{employee.salary}</td>
-                  <td>{employee.dob}</td>
-                  <td>{employee.hireDate}</td>
-                  <td>{employee.experience}</td>
+                  <td>
+                    {new Date(employee.dob).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}
+                  </td>
+
+                  <td>
+                    {new Date(employee.hireDate).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}
+                  </td>
+
+                  <td>{calculateDuration(employee.hireDate)}</td>
                   <td>{employee.gender}</td>
                   <td>{employee.aadharNumber}</td>
                   <td>
                     <div className="d-flex justify-content-center">
-                      <Link to={`/hr/editemployee/${employee.employeeId}`} className="btn btn-primary btn-sm me-2">
+                      <Link
+                        to={`/hr/editemployee/${employee.employeeId}`}
+                        className="btn btn-primary btn-sm me-2"
+                      >
                         <i className="bi bi-pencil-square"></i>
                       </Link>
-                      <Button variant="danger" size="sm" onClick={() => handleDelete(employee.employeeId)}>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={() => handleDelete(employee.employeeId)}
+                      >
                         <i className="bi bi-trash"></i>
                       </Button>
                     </div>
@@ -142,7 +202,7 @@ const ViewEmployee = () => {
       {/* Pagination */}
       <Pagination className="justify-content-center">
         <Pagination.Prev
-          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
         />
         {[...Array(totalPages)].map((_, index) => (
@@ -155,7 +215,9 @@ const ViewEmployee = () => {
           </Pagination.Item>
         ))}
         <Pagination.Next
-          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
           disabled={currentPage === totalPages}
         />
       </Pagination>

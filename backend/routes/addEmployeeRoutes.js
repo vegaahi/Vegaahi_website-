@@ -70,6 +70,7 @@ router.put("/updateby/:id",verifyToken, async (req, res) => {
   }
 });
 
+
 // Delete employee by ID
 router.delete("/delete/:id", verifyToken, async (req, res) => {
   try {

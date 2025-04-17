@@ -14,6 +14,8 @@ const contactRoutes = require("./routes/ContactusRoutes");
 const addUserRoutes = require("./routes/adduser");
 const blogRoutes = require("./routes/addblog");
 const employeeRoutes = require("./routes/addEmployeeRoutes");
+const offerRoutes = require("./routes/OffterLetterRoutes");
+
 dotenv.config();
 
 // Middleware
@@ -38,6 +40,10 @@ app.use("/users", addUserRoutes);
 app.use("/blog", blogRoutes);
 app.use("/employee", employeeRoutes);
 app.use("/employee/blog", blogRoutes);
+app.use('/offerletters', offerRoutes);
+ 
+
+
 
 // ✅ Serve React Build (After API Routes)
 app.use(express.static(path.join(__dirname, "../vega/build")));
@@ -53,7 +59,9 @@ const MONGODB_URL = process.env.MONGODB_URL;
 
 mongoose
   .connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("✅ Database connected..."))
+  .then(() =>{ console.log("✅ Database connected...")
+    require("./cronJobs/hiringNotification");
+  })
   .catch((error) => console.log("❌ Database connection error:", error));
 
 // ✅ Start Server

@@ -32,6 +32,32 @@ const EmployeeDashboard = () => {
   const toggleTheme = () => setDarkMode(!darkMode);
   const toggleDetails = () => setShowFullDetails(!showFullDetails);
 
+  const getDurationSinceJoining = (hireDate) => {
+    const now = new Date();
+    const hire = new Date(hireDate);
+
+    let years = now.getFullYear() - hire.getFullYear();
+    let months = now.getMonth() - hire.getMonth();
+    let days = now.getDate() - hire.getDate();
+
+    if (days < 0) {
+      months -= 1;
+      days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+    }
+
+    if (months < 0) {
+      years -= 1;
+      months += 12;
+    }
+
+    const durationParts = [];
+    if (years > 0) durationParts.push(`${years} yr`);
+    if (months > 0) durationParts.push(`${months} mo`);
+    if (days > 0 || durationParts.length === 0) durationParts.push(`${days} d`);
+
+    return durationParts.join(" ");
+  };
+
   if (loading) return <p className="text-center mt-5">Loading...</p>;
   if (error) return <p className="text-center text-danger mt-5">{error}</p>;
 
@@ -73,7 +99,10 @@ const EmployeeDashboard = () => {
               </div>
               <div className="col-md-3">
                 <div className="info-card rating">
-                  <h6>Joining Date</h6>
+                  <h6>
+                    Joining Date (
+                    {getDurationSinceJoining(employeeDetails.hireDate)})
+                  </h6>
                   <p>{new Date(employeeDetails.hireDate).toLocaleDateString()}</p>
                 </div>
               </div>

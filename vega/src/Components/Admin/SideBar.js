@@ -22,7 +22,7 @@ const SideBar = () => {
     { icon: "fas fa-file-alt", label: "Experience Letter", to: "/hr/experienceletter" },
     { icon: "fas fa-file-invoice-dollar", label: "Payslips", to: "/hr/payslips" },
     { icon: "fas fa-file-invoice-dollar", label: "Messages", to: "/hr/viewmessages" },
-    { icon: "fas fa-sign-out-alt", label: "Logout", to: "/hr/logout" },
+ 
   ];
 
   return (
