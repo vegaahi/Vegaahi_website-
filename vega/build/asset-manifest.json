@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.41edcab4.css",
-    "main.js": "/static/js/main.6fa3a20f.js",
+    "main.js": "/static/js/main.d517189a.js",
     "static/js/239.93b22f5e.chunk.js": "/static/js/239.93b22f5e.chunk.js",
     "static/js/213.02979c3b.chunk.js": "/static/js/213.02979c3b.chunk.js",
     "static/js/732.127b510b.chunk.js": "/static/js/732.127b510b.chunk.js",
@@ -40,6 +40,7 @@
     "static/media/sahith.jpg": "/static/media/sahith.cdda4f9b982ccaaeb3aa.jpg",
     "static/media/Aishwarya.jpg": "/static/media/Aishwarya.d0f003e515dd37d79b9e.jpg",
     "static/media/sushmitahighways.jpg": "/static/media/sushmitahighways.435b234b53ff566aecd2.jpg",
+    "static/media/logo.png": "/static/media/logo.52c7ed5833292f15dd2e.png",
     "static/media/SR.jpg": "/static/media/SR.f07f9dba4a1fce79ef7a.jpg",
     "static/media/fa-regular-400.woff2": "/static/media/fa-regular-400.4f6a2dabee9c092d09b9.woff2",
     "static/media/PRIYADARHSINI.jpg": "/static/media/PRIYADARHSINI.6e5d967d98fdcc2f0041.jpg",
@@ -56,7 +57,7 @@
     "static/media/fa-v4compatibility.woff2": "/static/media/fa-v4compatibility.c3ea317a0f10f201597f.woff2",
     "index.html": "/index.html",
     "main.41edcab4.css.map": "/static/css/main.41edcab4.css.map",
-    "main.6fa3a20f.js.map": "/static/js/main.6fa3a20f.js.map",
+    "main.d517189a.js.map": "/static/js/main.d517189a.js.map",
     "239.93b22f5e.chunk.js.map": "/static/js/239.93b22f5e.chunk.js.map",
     "213.02979c3b.chunk.js.map": "/static/js/213.02979c3b.chunk.js.map",
     "732.127b510b.chunk.js.map": "/static/js/732.127b510b.chunk.js.map",
@@ -64,6 +65,6 @@
   },
   "entrypoints": [
     "static/css/main.41edcab4.css",
-    "static/js/main.6fa3a20f.js"
+    "static/js/main.d517189a.js"
   ]
 }

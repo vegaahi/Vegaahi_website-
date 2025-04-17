@@ -90,7 +90,8 @@ const AddEmployee = () => {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: errorMessage,
+        text: "failed to add employee. may be employee ID or email already exists",
+        footer: `<p>${errorMessage}</p>`,
       });
     } finally {
       setLoading(false);

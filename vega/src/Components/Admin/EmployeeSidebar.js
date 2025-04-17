@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "../../css/Dashboard.css";
 
+import { useAuth } from "../../context/AuthContext";
+
 const EmployeeSidebar = () => {
+    const { user } = useAuth(); // Get user from AuthContext
     useEffect(() => {
         const mobileScreen = window.matchMedia("(max-width: 990px)");
     
@@ -75,15 +78,25 @@ const EmployeeSidebar = () => {
             <i className="fas fa-file-upload"></i> profile
           </Link>
 
+          {user?.department === "Marketing" && (
+            
+            <>
+              <Link to="/employee/viewblogsadmin" className="dashboard-nav-item">
+                <i className="fas fa-file-upload"></i> view blogs
+              </Link>
+              <Link to="/employee/addblog" className="dashboard-nav-item">
+                <i className="fas fa-file-upload"></i> add blog
+              </Link>
+            </>
+          )}
+
           {/* <Link to="/employee/viewblogsadmin" className="dashboard-nav-item">
             <i className="fas fa-file-upload"></i> view blogs
           </Link> */}
          
          
           <div className="nav-item-divider"></div>
-          <Link to="#" className="dashboard-nav-item">
-            <i className="fas fa-sign-out-alt"></i> Logout
-          </Link>
+        
         </nav>
       </div>
       <div className="dashboard-app">

@@ -27,9 +27,9 @@ router.post("/login", async (req, res) => {
     if (!isMatch) return res.status(400).json({ message: "Invalid password!" });
 
     const token = jwt.sign(
-      { id: employee._id, role: employee.role, email: employee.email, name: employee.name },
+      { id: employee._id, role: employee.role, email: employee.email, name: employee.name, department: employee.department },
       process.env.JWT_SECRET,
-      { expiresIn: "7d" } // Longer expiry
+      { expiresIn: "15m" }
     );
 
 
@@ -38,7 +38,8 @@ router.post("/login", async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Only true in production with HTTPS
       sameSite: "Lax", // You can also use 'Strict'
-      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+      // maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+      maxAge: 15 * 60 * 1000 
     });
 
     // ✅ Return user info (without token)
@@ -47,6 +48,7 @@ router.post("/login", async (req, res) => {
       role: employee.role,
       email: employee.email,
       name: employee.name,
+      department: employee.department
     });
 
   } catch (error) {
