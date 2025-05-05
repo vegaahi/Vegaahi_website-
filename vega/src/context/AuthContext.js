@@ -7,10 +7,10 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // ✅ loading state
+  const [loading, setLoading] = useState(true); 
   const navigate = useNavigate();
 
-  // Check if user is authenticated on app load
+ 
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         console.log("Not authenticated");
       } finally {
-        setLoading(false); // ✅ Always stop loading
+        setLoading(false); 
       }
     };
 
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
     try {
       await api.post("/auth/login", credentials, { withCredentials: true });
 
-      // Fetch verified user data after successful login
+    
       const verifyResponse = await api.get("/auth/verify", { withCredentials: true });
       setUser(verifyResponse.data);
 

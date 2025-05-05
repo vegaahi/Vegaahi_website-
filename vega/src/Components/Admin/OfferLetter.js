@@ -178,7 +178,7 @@ Veegahii IT Pvt. Ltd.
                 name="employeeId"
                 value={formData.employeeId}
                 onChange={handleChange}
-                readOnly
+               
               />
             </Form.Group>
           </Col>

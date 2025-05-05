@@ -71,7 +71,7 @@ const Level1 = () => {
                 Explore deeper into C programming while mastering Data Structures for efficient coding.
               </p>
               <a
-                href="#"
+                href="https://drive.google.com/file/d/1aEIEYVH5kQ04Mqp3lsEBCMp5wAx7OsnA/view"
                 className="btn btn-primary"
                 aria-label="View C Language and Data Structures course content"
               >
@@ -81,7 +81,7 @@ const Level1 = () => {
           </div>
         </div>
 
-        {/* Row 3 */}
+        {/* Row 3
         <div className="row mb-4">
           <div className="col-12">
             <div className="p-4 border rounded shadow-sm">
@@ -100,7 +100,7 @@ const Level1 = () => {
               </a>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

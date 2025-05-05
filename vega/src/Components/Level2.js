@@ -61,7 +61,7 @@ const Level2 = () => {
           </div>
         </div>
 
-        {/* Row 2 */}
+        {/* Row 2
         <div className="row mb-4">
           <div className="col-12">
             <div className="p-4 border rounded shadow-sm">
@@ -82,7 +82,7 @@ const Level2 = () => {
               </a>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Row 3 */}
         <div className="row mb-4">
@@ -90,7 +90,7 @@ const Level2 = () => {
             <div className="p-4 border rounded shadow-sm">
               <h3 className="fw-bold">
                 <FaJava style={{ color: '#FF8C00' }} className="me-2" />
-                Java + Spring Boot + Full Stack (with Placement)
+                Java + Spring Boot + Full Stack
               </h3>
               <p>
                 Master Java and Spring Boot framework with a full-stack
@@ -107,7 +107,7 @@ const Level2 = () => {
           </div>
         </div>
 
-        {/* Row 4 */}
+        {/* Row 4
         <div className="row mb-4">
           <div className="col-12">
             <div className="p-4 border rounded shadow-sm">
@@ -128,7 +128,7 @@ const Level2 = () => {
               </a>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Row 5 */}
         <div className="row mb-4">
@@ -140,7 +140,7 @@ const Level2 = () => {
               </h3>
               <p>Learn the basics of Python programming, ideal for beginners.</p>
               <a
-                href="#"
+                href="https://drive.google.com/file/d/1mlt5gb4tH3BQNIQcTZl2ggSi-dmLlE2C/view"
                 className="btn btn-primary"
                 aria-label="View Basic Python course content"
               >
@@ -163,7 +163,7 @@ const Level2 = () => {
                 Data Science.
               </p>
               <a
-                href="#"
+                href="https://drive.google.com/file/d/1dC3TVwsZ63Ln2s8TAsUZ55yglDw05A_r/view"
                 className="btn btn-primary"
                 aria-label="View Python + ML + DS course content"
               >
