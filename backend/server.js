@@ -58,7 +58,7 @@ const PORT = process.env.PORT || 3001;
 const MONGODB_URL = process.env.MONGODB_URL;
 
 mongoose
-  .connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(MONGODB_URL, )
   .then(() =>{ console.log("✅ Database connected...")
     require("./cronJobs/hiringNotification");
   })

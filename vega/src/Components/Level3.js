@@ -88,7 +88,7 @@ const Level3 = () => {
                                           <div className="d-flex align-items-center mb-3">
                                             <FaCode style={{ color: "#FF4500" }} className="me-3" />
                                             <h3 className="mb-0">
-                                              Entry Level MEAN Stack (HTML5 + CSS3 + Bootstrap + JS + Basic React)
+                                              Entry Level MERN Stack (HTML5 + CSS3 + Bootstrap + JS + Basic React)
                                             </h3>
                                           </div>
                                           <p>
@@ -110,7 +110,7 @@ const Level3 = () => {
                                           <div className="d-flex align-items-center mb-3">
                                             <FaProjectDiagram style={{ color: "#32CD32" }} className="me-3" />
                                             <h3 className="mb-0">
-                                              Advanced Level MEAN Stack (HTML5 + CSS3 + Bootstrap + JS + React Framework + Project)
+                                              Advanced Level MERN Stack (HTML5 + CSS3 + Bootstrap + JS + React Framework + Project)
                                             </h3>
                                           </div>
                                           <p>
