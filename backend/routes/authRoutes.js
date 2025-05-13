@@ -5,49 +5,76 @@ const Employee = require("../model/employeeSchema");
 
 const router = express.Router();
 
-// Employee Login
+//login route
 router.post("/login", async (req, res) => {
   try {
     let { email, role, password } = req.body;
 
-    // Validate the input fields
     if (!email || !role || !password) {
       return res.status(400).json({ message: "Email, role, and password are required!" });
     }
 
-    // Convert role to lowercase for case-insensitive comparison
     role = role.toLowerCase();
 
-    // Find employee by email
     const employee = await Employee.findOne({ email });
     if (!employee) return res.status(400).json({ message: "Invalid email!" });
 
-    // Compare role (case-insensitive)
     if (employee.role.toLowerCase() !== role) {
       return res.status(400).json({ message: "Role does not match!" });
     }
 
-    // Compare password with hashed password
     const isMatch = await bcrypt.compare(password, employee.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid password!" });
 
-    // Generate JWT token
     const token = jwt.sign(
-      { id: employee._id, role: employee.role, email: employee.email, name: employee.name },
-      process.env.JWT_SECRET,  // Store your JWT secret in the environment variables
-      { expiresIn: "1h" } // Token expires in 1 hour
+      { id: employee._id, role: employee.role, email: employee.email, name: employee.name, department: employee.department },
+      process.env.JWT_SECRET,
+      { expiresIn: "15m" }
     );
 
-    // Send response with token and employee info
-    res.json({
-      token,
+
+    // ✅ Set the cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Only true in production with HTTPS
+      sameSite: "Lax", // You can also use 'Strict'
+      // maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+      maxAge: 15 * 60 * 1000 
+    });
+
+    // ✅ Return user info (without token)
+    res.status(200).json({
+      message: "Login successful",
       role: employee.role,
       email: employee.email,
       name: employee.name,
+      department: employee.department
     });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
+  }
+});
+
+
+
+// Logout route
+router.post("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.status(200).json({ message: "Logged out successfully" });
+});
+
+// ✅ ADD THIS ROUTE BELOW LOGIN
+router.get("/verify", (req, res) => {
+  const token = req.cookies.token;
+  if (!token) return res.status(401).json({ message: "Not authenticated" });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    res.status(200).json(decoded);
+  } catch (err) {
+    return res.status(403).json({ message: "Invalid or expired token" });
   }
 });
 

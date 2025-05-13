@@ -12,7 +12,7 @@ const LatestNews = () => {
           src={hiring}
           alt="We Are Hiring"
           className="img-fluid rounded"
-          style={{ maxHeight: '400px', objectFit: 'cover' }} 
+          style={{ width: '100%', height: 'auto' }} 
         />
       </div>
     </div>

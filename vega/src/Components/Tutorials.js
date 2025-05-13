@@ -206,7 +206,7 @@ const Tutorials = () => {
     {
       title: 'Data Science Resources',
       description: 'Comprehensive data science tutorials and resources.',
-      link: 'https://www.coursera.org/articles/data-science',
+      link: 'https://www.w3schools.com/datascience/',
       icon: <FaPython />,
       iconColor: '#306998',
     }

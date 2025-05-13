@@ -40,6 +40,7 @@ const Profile = () => {
         <>
           <h2>Welcome, {employeeDetails.name}</h2>
           <p><strong>Email:</strong> {employeeDetails.email || "Not available"}</p>
+          <p><strong>Designation:</strong> {employeeDetails.designation || "Not available"}</p>
           <p><strong>Phone Number:</strong> {employeeDetails.phoneNumber || "Not available"}</p>
           <p><strong>Role:</strong> {employeeDetails.role || "Not available"}</p>
           <p><strong>Department:</strong> {employeeDetails.department || "Not available"}</p>

@@ -11,7 +11,8 @@ const EmployeeSchema = new mongoose.Schema(
       type: String,
       enum: ["md/boardofdirectors", "manager", "hr", "employee", "intern"], 
       required: true,
-    }, 
+    },
+      designation: { type: String, required: true }, 
     department: { type: String, required: true },
     location: {
       type: String,
