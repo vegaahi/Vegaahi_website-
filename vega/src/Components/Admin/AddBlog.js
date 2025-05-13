@@ -18,6 +18,8 @@ const modules = {
   },
 };
 
+// checking
+
 const AddBlog = () => {
   const [blog, setBlog] = useState({ title: "", content: "", imageFile: null });
   const [editorKey, setEditorKey] = useState(0); // Reset ReactQuill editor
