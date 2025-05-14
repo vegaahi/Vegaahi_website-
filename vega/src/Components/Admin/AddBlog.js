@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Image } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Swal from "sweetalert2";
@@ -18,12 +18,11 @@ const modules = {
   },
 };
 
-// checking
-
 const AddBlog = () => {
   const [blog, setBlog] = useState({ title: "", content: "", imageFile: null });
-  const [editorKey, setEditorKey] = useState(0); // Reset ReactQuill editor
-  const fileInputRef = useRef(null); // Reference to file input
+  const [previewImage, setPreviewImage] = useState(null);
+  const [editorKey, setEditorKey] = useState(0);
+  const fileInputRef = useRef(null);
 
   const validateForm = () => {
     if (!blog.title.trim()) {
@@ -53,6 +52,12 @@ const AddBlog = () => {
     const file = e.target.files[0];
     if (file) {
       setBlog({ ...blog, imageFile: file });
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -71,11 +76,10 @@ const AddBlog = () => {
       });
       Swal.fire({ icon: "success", title: "Success!", text: "Blog added successfully!" });
 
-      // Reset form fields
       setBlog({ title: "", content: "", imageFile: null });
-      setEditorKey(prevKey => prevKey + 1); // Reset ReactQuill editor
-      if (fileInputRef.current) fileInputRef.current.value = ""; // Clear file input
-
+      setPreviewImage(null);
+      setEditorKey(prevKey => prevKey + 1);
+      if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (error) {
       Swal.fire({ icon: "error", title: "Oops!", text: "Failed to add blog. Please try again." });
     }
@@ -83,6 +87,17 @@ const AddBlog = () => {
 
   return (
     <Container className="p-4 shadow-lg rounded bg-light my-3">
+      {/* Inline CSS to control Quill image styling */}
+      <style>
+        {`
+          .quill .ql-editor img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+          }
+        `}
+      </style>
+
       <h2 className="mb-4 text-center text-primary">Add New Blog</h2>
       <Form onSubmit={handleSubmit} noValidate>
         <Form.Group className="mb-3">
@@ -99,7 +114,7 @@ const AddBlog = () => {
         <Form.Group className="mb-3">
           <Form.Label className="fw-bold">Content</Form.Label>
           <ReactQuill
-            key={editorKey} // Ensures re-render on reset
+            key={editorKey}
             value={blog.content}
             onChange={handleContentChange}
             modules={modules}
@@ -108,7 +123,27 @@ const AddBlog = () => {
 
         <Form.Group className="mb-3">
           <Form.Label className="fw-bold">Upload Image</Form.Label>
-          <Form.Control type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} />
+          <Form.Control
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            ref={fileInputRef}
+          />
+          {previewImage && (
+            <div className="mt-3">
+              <Image
+                src={previewImage}
+                alt="Preview"
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                  border: "1px solid #ccc",
+                }}
+              />
+            </div>
+          )}
         </Form.Group>
 
         <Button variant="primary" type="submit" className="w-100 fw-bold">

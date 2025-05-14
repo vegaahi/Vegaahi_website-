@@ -9,8 +9,22 @@ const ViewBlogs = () => {
   const [show, setShow] = useState(false);
   const [selectedBlog, setSelectedBlog] = useState(null);
 
-  // Backend Base URL from environment variables
+   // Backend Base URL from environment variables
   const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
+
+useEffect(() => {
+  if (show) {
+    const imgs = document.querySelectorAll(".modal-body img");
+    imgs.forEach((img) => {
+      img.style.maxWidth = "100%";
+      img.style.height = "auto";
+      img.style.display = "block";
+      img.style.margin = "10px auto";
+      img.style.borderRadius = "8px";
+    });
+  }
+}, [show]);
+
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -117,9 +131,12 @@ const ViewBlogs = () => {
               />
             </div>
           )}
-          <p className="text-dark">
+          <div
+            className="text-dark"
+            style={{ lineHeight: "1.6", wordWrap: "break-word" }}
+          >
             <span dangerouslySetInnerHTML={{ __html: selectedBlog?.content }} />
-          </p>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShow(false)}>
