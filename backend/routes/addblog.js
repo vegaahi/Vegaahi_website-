@@ -16,16 +16,24 @@ const storage = multer.diskStorage({
     destination: (_, __, cb) => cb(null, uploadDir),
     filename: (_, file, cb) => cb(null, `${Date.now()}${path.extname(file.originalname)}`)
 });
-const upload = multer({ storage });
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 20 * 1024 * 1024 }, // 20MB limit (adjust as needed)
+}).single('image');  // Use .single('image') to handle a single image upload
 
 // Helper function for error handling
 const handleError = (res, error) => res.status(500).json({ message: "Server error", error: error.message });
 
 // Route to add a new blog
-router.post("/addblog", upload.single("image"), async (req, res) => {
+router.post("/addblog", upload, async (req, res) => {
     try {
         const { title, content } = req.body;
-        if (!title || !content || !req.file) return res.status(400).json({ message: "All fields are required" });
+
+        // Validate required fields
+        if (!title || !content || !req.file) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
 
         // Generate full image URL
         const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
@@ -34,7 +42,9 @@ router.post("/addblog", upload.single("image"), async (req, res) => {
         const newBlog = await Blog.create({ title, content, image: imageUrl });
 
         res.status(201).json({ message: "Blog added successfully", data: newBlog });
-    } catch (error) { handleError(res, error); }
+    } catch (error) {
+        handleError(res, error);
+    }
 });
 
 // Serve uploaded images statically
@@ -42,20 +52,30 @@ router.use("/uploads", express.static(uploadDir));
 
 // Route to get all blogs
 router.get("/getallblogs", async (_, res) => {
-    try { res.status(200).json({ message: "All Blogs", data: await Blog.find().lean() }); }
-    catch (error) { handleError(res, error); }
+    try {
+        const blogs = await Blog.find().lean();
+        res.status(200).json({ message: "All Blogs", data: blogs });
+    } catch (error) {
+        handleError(res, error);
+    }
 });
 
 // Route to get a single blog by ID
 router.get("/getblog/:id", async (req, res) => {
     try {
         const blog = await Blog.findById(req.params.id).lean();
-        blog ? res.status(200).json({ message: "Blog found", data: blog }) : res.status(404).json({ message: "Blog not found" });
-    } catch (error) { handleError(res, error); }
+        if (blog) {
+            res.status(200).json({ message: "Blog found", data: blog });
+        } else {
+            res.status(404).json({ message: "Blog not found" });
+        }
+    } catch (error) {
+        handleError(res, error);
+    }
 });
 
 // Route to update a blog
-router.put("/updateblog/:id", upload.single("image"), async (req, res) => {
+router.put("/updateblog/:id", upload, async (req, res) => {
     try {
         const { title, content } = req.body;
         const updates = { title, content };
@@ -70,15 +90,23 @@ router.put("/updateblog/:id", upload.single("image"), async (req, res) => {
         }
 
         const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, updates, { new: true }).lean();
-        updatedBlog ? res.status(200).json({ message: "Blog updated successfully", data: updatedBlog }) : res.status(404).json({ message: "Blog not found" });
-    } catch (error) { handleError(res, error); }
+        if (updatedBlog) {
+            res.status(200).json({ message: "Blog updated successfully", data: updatedBlog });
+        } else {
+            res.status(404).json({ message: "Blog not found" });
+        }
+    } catch (error) {
+        handleError(res, error);
+    }
 });
 
 // Route to delete a blog
 router.delete("/deleteblog/:id", async (req, res) => {
     try {
         const blog = await Blog.findById(req.params.id);
-        if (!blog) return res.status(404).json({ message: "Blog not found" });
+        if (!blog) {
+            return res.status(404).json({ message: "Blog not found" });
+        }
 
         if (blog.image) {
             const imagePath = path.join(uploadDir, path.basename(blog.image));
@@ -87,7 +115,9 @@ router.delete("/deleteblog/:id", async (req, res) => {
 
         await Blog.findByIdAndDelete(req.params.id);
         res.status(200).json({ message: "Blog deleted successfully" });
-    } catch (error) { handleError(res, error); }
+    } catch (error) {
+        handleError(res, error);
+    }
 });
 
 module.exports = router;
