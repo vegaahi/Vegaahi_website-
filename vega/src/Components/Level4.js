@@ -51,7 +51,7 @@ const Level4 = () => {
                                      Learn the fundamentals of manual testing, including test case design and execution techniques.
                                    </p>
                                    <a
-                                     href="#"
+                                     href="https://drive.google.com/file/d/1aZ1DLWLqRJBMEdGf8VwGMjOF1TcxQySw/view?usp=sharing"
                                      className="btn btn-primary"
                                      aria-label="View Manual Testing course content"
                                    >
@@ -73,7 +73,7 @@ const Level4 = () => {
                                      Master both manual testing and automation testing using Selenium for web application testing.
                                    </p>
                                    <a
-                                     href="#"
+                                     href="https://drive.google.com/file/d/1L4Zrshg_BtMAZ7BlXO4H03cur-QKGMYF/view?usp=sharing"
                                      className="btn btn-primary"
                                      aria-label="View Manual Testing + Automation Testing (Selenium) course content"
                                    >

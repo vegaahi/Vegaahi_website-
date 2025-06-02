@@ -123,7 +123,7 @@ function App() {
           </Route>
 
           
-
+ 
           {/* <Route element={<ProtectedRoute allowedRoles={["Intern"]} />}>
             <Route path="/intern/*" element={<InternDashboard />} />
           </Route> */}

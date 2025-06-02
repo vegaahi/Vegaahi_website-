@@ -2,6 +2,8 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import mission from "../Assests/Mission.jpeg";
 import vision from "../Assests/vision.jpeg";
+import Ashwini from "../Assests/Ashwani.jpg";
+import Sruthi from "../Assests/sruthi.jpg";
 import pawan from "../Assests/pawan3.jpg";
 import sahit from "../Assests/sahith.jpg";
 import saipavan from "../Assests/saipavan2.jpg";
@@ -13,6 +15,7 @@ import lavanya from "../Assests/lavanya.jpg";
 import sandeep from "../Assests//sandeep.jpg";
 import ganesh from "../Assests/ganesh.jpg";
 import EmployeeCard from "./EmployeeCard";
+
 const AboutUs = () => {
   // Array of employee data
   const employees = [
@@ -44,13 +47,13 @@ const AboutUs = () => {
         "Proficient in HTML, CSS, JavaScript, and React. Enjoys turning designs into pixel-perfect, interactive websites with clean code.",
     },
     {
-      image: Ramesh,
-      title: "Python Developer",
-      name: "Durga Ramesh Chinthapalli",
+      image: Sruthi,
+      title: "Software Trainee",
+      name: "Sruthi Nelam",
       description:
-        '"Expertise in Python frameworks, problem-solving, and coding best practices, with a focus on automation, performance, and user-centric design."',
-      about:
-        "Experienced in building scalable backend services with Node.js, Express, and MongoDB. Loves solving complex problems and integrating APIs.",
+        '"A software trainee is a budding coder, eager to learn and grow in the world of programming, ready to tackle challenges with enthusiasm."',
+      about:    
+        "A software trainee is a budding coder, eager to learn and grow in the world of programming, ready to tackle challenges with enthusiasm. Proficient in HTML, CSS, JavaScript, and React. Enjoys turning designs into pixel-perfect, interactive websites with clean code.",
     },
     {
       image: sahit,
@@ -62,9 +65,9 @@ const AboutUs = () => {
         "Experience in Installation, Configuration, Implementation, up-gradation, Maintenance and Creating and maintaining user accounts, profiles, security, rights, disk space and process monitoring. Experience in User & Group Security administration, backup & recovery.",
     },
     {
-      image: Saikrishna,
-      title: "Software Engineer",
-      name: "Saikrishna Macha",
+      image: Ashwini,
+      title: "Software Trainee",
+      name: "Ashwini Ponnollu",
       description:
         '"Crafting innovation and mentoring future coders, my journey in software engineering has been a thrilling ride of growth and creativity."',
       about:

@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 20 * 1024 * 1024 }, // 20MB limit (adjust as needed)
+  limits: { fileSize: 20* 1024 * 1024 }, // 20MB limit (adjust as needed)
 }).single('image');  // Use .single('image') to handle a single image upload
 
 // Helper function for error handling

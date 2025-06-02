@@ -14,7 +14,7 @@ const BasicProgramming = () => {
               Learn the fundamentals of computers and C programming in one comprehensive course.
             </p>
             <a
-              href="https://drive.google.com/file/d/12mYS11PfFwCRiOIP_zag9Egdkgo_cx5i/view?usp=sharing"
+              href="https://drive.google.com/file/d/12mYS11PfFwCRiOEgdkgo_cx5i/view?usp=sharing"
               className="btn btn-primary"
               aria-label="View Basic Computer and C Language course content"
             >

@@ -47,7 +47,7 @@ const Level5 = () => {
                                   </div>
                                   <p>Learn the fundamentals of cloud computing and how it can be leveraged in modern businesses.</p>
                                   <a
-                                    href="#"
+                                    href="https://drive.google.com/file/d/1OEVbtWt2fH9hiUBoTuYa49E1JPsgWFxV/view?usp=sharing"
                                     className="btn btn-primary"
                                     aria-label="View Cloud Technology course content"
                                   >
@@ -65,7 +65,7 @@ const Level5 = () => {
                                   </div>
                                   <p>Get hands-on experience with Amazon Web Services (AWS) and its integration with cloud technologies.</p>
                                   <a
-                                    href="#"
+                                    href="https://drive.google.com/file/d/1Pb26_1kHdfghaR0DK_y3VZClv41rcLWk/view?usp=sharing"
                                     className="btn btn-primary"
                                     aria-label="View AWS + Cloud course content"
                                   >
@@ -83,7 +83,7 @@ const Level5 = () => {
                                   </div>
                                   <p>Learn AWS tools along with DevOps and Kubernetes for effective cloud infrastructure management.</p>
                                   <a
-                                    href="#"
+                                    href="https://drive.google.com/file/d/1lBR1GXXPRwSrgNVPY3hGyvKvINkmQ5x_/view?usp=sharing"
                                     className="btn btn-primary"
                                     aria-label="View AWS (DevOps + Kubernetes) course content"
                                   >
@@ -101,7 +101,7 @@ const Level5 = () => {
                                   </div>
                                   <p>Understand the key principles of computer networking and how they apply to cloud environments.</p>
                                   <a
-                                    href="#"
+                                    href="https://drive.google.com/file/d/114pAW-tjarlpj6OdvgqUL1a3uEbqunhu/view?usp=sharing"
                                     className="btn btn-primary"
                                     aria-label="View Networking course content"
                                   >
@@ -119,7 +119,7 @@ const Level5 = () => {
                                   </div>
                                   <p>Learn how to manage and configure both Windows and Linux servers in a cloud environment.</p>
                                   <a
-                                    href="#"
+                                    href="https://drive.google.com/file/d/1n5Q6om1yqF_InyjzPqTUhjttT2H98_RE/view?usp=sharing"
                                     className="btn btn-primary"
                                     aria-label="View Servers (Windows & Linux) course content"
                                   >

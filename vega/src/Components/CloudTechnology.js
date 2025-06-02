@@ -17,7 +17,7 @@ const CloudTechnology = () => {
             </div>
             <p>Learn the fundamentals of cloud computing and how it can be leveraged in modern businesses.</p>
             <a
-              href="#"
+              href="https://drive.google.com/file/d/1OEVbtWt2fH9hiUBoTuYa49E1JPsgWFxV/view?usp=sharing"
               className="btn btn-primary"
               aria-label="View Cloud Technology course content"
             >
@@ -35,7 +35,7 @@ const CloudTechnology = () => {
             </div>
             <p>Get hands-on experience with Amazon Web Services (AWS) and its integration with cloud technologies.</p>
             <a
-              href="#"
+              href="https://drive.google.com/file/d/1lBR1GXXPRwSrgNVPY3hGyvKvINkmQ5x_/view?usp=sharing"
               className="btn btn-primary"
               aria-label="View AWS + Cloud course content"
             >
@@ -89,7 +89,7 @@ const CloudTechnology = () => {
             </div>
             <p>Learn how to manage and configure both Windows and Linux servers in a cloud environment.</p>
             <a
-              href="#"
+              href="https://drive.google.com/file/d/1aEIEYVH5kQ04Mqp3lsEBCMp5wAx7OsnA/view"
               className="btn btn-primary"
               aria-label="View Servers (Windows & Linux) course content"
             >

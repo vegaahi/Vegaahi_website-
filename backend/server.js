@@ -15,7 +15,7 @@ const addUserRoutes = require("./routes/adduser");
 const blogRoutes = require("./routes/addblog");
 const employeeRoutes = require("./routes/addEmployeeRoutes");
 const offerRoutes = require("./routes/OffterLetterRoutes");
-
+const incrementLetterRoutes = require('./routes/incrementLetterRoutes');
 dotenv.config();
 
 // Middleware
@@ -41,7 +41,7 @@ app.use("/blog", blogRoutes);
 app.use("/employee", employeeRoutes);
 app.use("/employee/blog", blogRoutes);
 app.use('/offerletters', offerRoutes);
- 
+ app.use('/api/increment-letters', incrementLetterRoutes);
 
 
 

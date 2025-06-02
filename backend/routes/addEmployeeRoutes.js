@@ -58,6 +58,26 @@ router.get("/getby/:id",  async (req, res) => {
   }
 });
 
+router.get('/:employeeId', async (req, res) => {
+  try {
+    const employeeIdNum = Number(req.params.employeeId);
+    if (isNaN(employeeIdNum)) {
+      return res.status(400).json({ message: 'Invalid employeeId format' });
+    }
+
+    const employee = await Employee.findOne({ employeeId: employeeIdNum });
+    if (!employee) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+
+    res.status(200).json(employee);
+  } catch (error) {
+    console.error('Error fetching employee:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
 // Update employee by ID
 router.put("/updateby/:id",verifyToken, async (req, res) => {
   try {
